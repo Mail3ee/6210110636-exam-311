@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  const incAPI = async (response)  =>{
+    let result = await axios.post('http://localhost:8080/api/inc', {})
+    setCount(result.data.number)
+  }
+  
+  const refAPI = async (response)  =>{
+    let result = await axios.post('http://localhost:8080/api/ref', {})
+    // console.log(result.data)
+    setCount(result.data.number)
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        Server Number : 
+        <input type='text'  value={count}></input>
+      </div>
+      <button onClick={incAPI}> Increase </button>
+      <button onClick={refAPI}> Refresh </button>
     </div>
   );
 }

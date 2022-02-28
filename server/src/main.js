@@ -14,10 +14,12 @@ app.get('/', (req, res) =>{
 
 app.post('/api/inc', bodyParser.json(), (req, res) =>{
     serverNumber = serverNumber + 1
+    console.log('Server Num : ' + serverNumber)
     res.send({number: serverNumber})
 })
 
 app.post('/api/ref', (req, res) =>{
+    console.log('Refresh Number : ' + serverNumber)
     res.send({number: serverNumber})
 })
 
